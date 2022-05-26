@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99d34d26f732124baddf76520ef5ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 992176645}
   vel: 0
   forcaPulo: 0
   noChao: 0

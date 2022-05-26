@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveBola : MonoBehaviour
 {
 
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     public float vel;
     public float forcaPulo;
     public bool noChao;
@@ -22,30 +22,34 @@ public class MoveBola : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      noChao = Physics2D.OverlapCircle(transform.position,raio,layer);
+        noChao = Physics2D.OverlapCircle(transform.position,raio,layer);
 
-      if(noChao && Input.GetKeyDown(KeyCode.Space))
-      {
-          rb.velocity = new Vector2(rb.velocity.x,(rb.velocity.y + 1) * forcaPulo);
-      }  
+        if(noChao && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = new Vector2(rb.velocity.x,(rb.velocity.y + 1) * forcaPulo);       
+            
+        }
+        
     }
 
-    void FixedUpate()
+    void FixedUpdate()
     {
         if(rb != null)
         {
-            //chamando metodo
+            AplicaForca();
         }
+
     }
 
     public void AplicaForca()
     {
         float yVel = rb.velocity.y;
         float xInput = Input.GetAxis("Horizontal");
-        float XForca = xInput * vel * Time.deltaTime;
+        float xForca = xInput * vel * Time.deltaTime;
 
-        Vector2 forca = new Vector2(XForca,0);
+        Vector2 forca = new Vector2(xForca,0);
 
-        rb.velocity = new Vector2(XForca,rb.velocity.y);
+        rb.velocity = new Vector2(xForca,rb.velocity.y);
     }
+
 }
