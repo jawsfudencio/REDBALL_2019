@@ -47,9 +47,56 @@ public class MoveBola : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
         float xForca = xInput * vel * Time.deltaTime;
 
-        Vector2 forca = new Vector2(xForca,0);
+        if(xInput != 0)
+        {
+            Vector2 forca = new Vector2(xForca,0);
+            rb.AddForce(forca,ForceMode2D.Force);
+        }
+       
 
-        rb.velocity = new Vector2(xForca,rb.velocity.y);
+        
+
+
+
+
+        if(noChao)
+        {
+
+                if(xInput > 0)
+                {
+                    constantForce2.torque = -1;
+                }
+                else if(xInput < 0)
+                {
+                    constantForce2.torque = 1;
+                }
+                else
+                {
+                    constantForce2.torque = 0;
+                }
+            
+        }
+        else
+        {
+            if(xInput > 0)
+            {
+                constantForce2.torque = -8;
+            }
+            else if(xInput < 0)
+            {
+                constantForce2.torque = 8;
+            }
+            else
+            {
+                constantForce2.torque = 0;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,raio);
     }
 
 }
